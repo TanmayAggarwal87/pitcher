@@ -1,10 +1,16 @@
-import Cards from "@/components/Cards";
-import { auth } from "../../../auth";
+import Cards ,{StartupTypeCard} from "@/components/Cards";
 import SearchForm from "@/components/SearchForm";
+import { SanityLive } from "@/lib/live";
+import { STARTUPS_QUERY } from "@/lib/query";
+import { sanityFetch } from "@/sanity/lib/live";
 
  const Home =async ({searchParams}:{searchParams:Promise<{query?:string}>})=>{
-  const session = await auth()
   const query = (await searchParams).query;
+   const params = { search: query || null };
+   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY,params});
+
+ 
+ 
   return (
   <>
   
@@ -59,12 +65,23 @@ import SearchForm from "@/components/SearchForm";
       
     </div>
 
-    <div>
-      <p className="text-2xl font-bold font-work-sans my-3 mx-2">
+    <div className="w-full">
+      <p className="text-3xl font-bold font-work-sans my-6 mx-5">
         {query ? `Search Results for ${query}` : "All Startups"}
       </p>
-      <Cards/>
+
+      <ul className="mt-7  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
+          {posts?.length > 0 ? (
+            posts.map((post: StartupTypeCard) => (
+              <Cards key={post?._id} post={post} />
+            ))
+          ) : (
+            <p className="no-results text-3xl font-bold font-work-sans my-6 mx-5 ">No startups found</p>
+          )}
+        </ul>
       </div>
+
+      <SanityLive/>
   
     
  </>   

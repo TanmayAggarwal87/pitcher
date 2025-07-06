@@ -6,7 +6,7 @@ import "../globals.css"
 export default function Layout({children}:Readonly<{children:React.ReactNode}>){
 
   return (
-    <html className=" bg-white">
+    <html lang ="en" className="bg-white">
     <body>
         <Navbar/>
         {children}
