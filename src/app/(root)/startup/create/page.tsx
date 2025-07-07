@@ -2,6 +2,8 @@ import React from 'react'
 import { auth } from '../../../../../auth'
 import { redirect } from 'next/navigation';
 import StartupForm from '@/components/StartupForm';
+import { Toaster } from "react-hot-toast";
+
 
 
 const page = async() => {
@@ -43,6 +45,7 @@ const page = async() => {
 
         <div>
             <StartupForm/>
+            <Toaster/>
             
         </div>
     </div>

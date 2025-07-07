@@ -24,19 +24,25 @@ const Cards = ( {post}:{post:StartupTypeCard}) => {
         
   return (
     <div className='mx-5 my-3 '>
-        <div className="max-w-[400px] rounded-lg overflow-hidden shadow-lg bg-white font-sans border-3 border-black hover:bg-blue-100 transition-all duration-500">
+        <div className="max-w-[400px] object-cover rounded-lg overflow-hidden shadow-lg bg-white font-sans border-3 border-black hover:bg-blue-100 transition-all duration-500">
         {/* Image at the top */}
-            <Link href={`/startup/${_id}`} >
-                <div className="h-48 bg-gray-200 flex items-center justify-center">
-                    <img src={image} alt='image'/> 
-                </div>
+        <div className="h-48 max-h-[300px] flex items-center justify-center bg-gray-200 overflow-hidden">
+            <Link href={`/startup/${_id}`}>
+                <img 
+                src={image} 
+                alt="image" 
+                className="h-full w-full object-contain" 
+                />
             </Link>
+        </div>
+
+            
 
             
             
             {/* Content area */}
             <div className="p-6 mt-6">
-                <div  className='flex justify-between items-center flex-row text-xl font-semibold font-work-sans my-2'>
+                <div  className='flex justify-between items-center flex-row text-xl font-semibold font-work-sans my-2  mb-3'>
                     <div className=' '>{formatDate(_createdAt)}</div>
                     <div  className='flex justify-center items-center flex-row gap-1'>
                         <Eye className='size-6 text-blue-600'/>

@@ -1,20 +1,57 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useActionState, useState } from 'react'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import MDEditor from '@uiw/react-md-editor';
 import { Loader2, Send } from 'lucide-react';
+import { formSchema } from '@/lib/validation';
+import { toast } from 'react-hot-toast';
+import {z} from "zod"
+import { useRouter } from 'next/navigation';
+import { createPitch } from '@/lib/actions';
 
 
 
 const StartupForm = () => {
     const [errors, setErrors] = useState<Record<string,string>>({})
     const [pitch,setPitch] =useState("");
-    const isPending =false;
+    const router = useRouter()
+    const handleFormSubmit=async(prevState: any, formData: FormData)=>{
+      try {
+        
+        const formValues ={
+          title: formData.get("title") as string,
+          description: formData.get("description") as string,
+          category: formData.get("category") as string,
+          link: formData.get("link") as string,
+          pitch,
+        }
+
+        await formSchema.parseAsync(formValues);
+        const result = await createPitch(prevState,formData,pitch)
+
+        if(result.status=="SUCCESS"){
+          toast.success("Your startup pitch is created successfully")
+          router.push(`/startup/${result._id}`);
+        }
+        return result;
+      } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErorrs = error.flatten().fieldErrors;
+
+        setErrors(fieldErorrs as unknown as Record<string, string>);
+
+        toast.error("Please check your inputs and try again");
+
+        return { ...prevState, error: "Validation failed", status: "ERROR" }
+      
+    }}}
+    const [state ,formAction,isPending] = useActionState(handleFormSubmit, {error:"",status:"INITIAL"})
+    
   return (
     <div>
-        <form action={()=>{}} className=' max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;'>
+        <form action={formAction} className=' max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;'>
 
             <label htmlFor='title' className='font-semibold text-[22px] text-black uppercase'>Title</label>
             <Input id='title' name='title' placeholder='Startup Title' required className='border-[1px] border-black px-5 py-7 text-[24px] text-black font-semibold rounded-xl mt-3 '/>
