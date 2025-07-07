@@ -52,7 +52,10 @@ const Cards = ( {post}:{post:StartupTypeCard}) => {
                         <Link href={`/startup/${_id}`}><div className="text-3xl font-bold text-gray-800 mb-4">{title}</div></Link>
                     
                     </div>
-                    <Link href={`user/${author?._id}`}><div><img src={author?.image} height={50} width={50} className='rounded-full'/></div></Link>
+                    <div className='relative -top-6'>
+                        <Link href={`user/${author?._id}`}><div><img src={author?.image} height={50} width={50} className='rounded-full'/></div></Link>
+                    </div>
+                    
                 </div>
                 
                 

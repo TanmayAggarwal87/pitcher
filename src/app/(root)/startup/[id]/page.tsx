@@ -1,15 +1,19 @@
 import { STARTUP_BY_ID_QUERY } from '@/lib/query'
 import { formatDate } from '@/lib/utils'
 import { client } from '@/sanity/lib/client'
-import Image from 'next/image'
-import React from 'react'
+import React, { Suspense } from 'react'
+import markdownit from "markdown-it";
+import { Skeleton } from '@/components/ui/skeleton'
+import View from '@/components/Views'
 
 
 export const experimental_ppr =true
 const page = async({params}:{params:Promise<{id:string}>}) => {
-
+    
+    const md = markdownit();    
     const id = (await params).id
     const post = await client.fetch(STARTUP_BY_ID_QUERY,{id})
+    const parsedContent = md.render(post?.pitch || "");
   return (
     <div>
         <div className="relative bg-blue-700 w-full min-h-[200px] flex justify-center items-center flex-col py-10 px-4 sm:px-6 overflow-hidden">
@@ -62,22 +66,64 @@ const page = async({params}:{params:Promise<{id:string}>}) => {
             <img src={post.image} alt="image" className='h-auto w-screen rounded-xl'/>
         </div>
 
-        <div>
-            <div className='lft'>
-                <div className='rounded-full'> 
-                    <img src={post?.author?.image} height={60} width={60} alt='image' className='rounded-full'/>
+        <div className="w-full px-4 sm:px-6 md:px-10">
+            <div className="max-w-screen-md mx-auto flex flex-wrap items-center justify-between my-6">
+                {/* Left Side - Author Info */}
+                <div className="flex items-center gap-4 min-w-0">
+                    <div className="rounded-full shadow-xl overflow-hidden w-14 h-14">
+                        <img
+                        src={post?.author?.image}
+                        alt="author"
+                        className="w-full h-full object-cover rounded-full"
+                        />
+                    </div>
+                    <div className="min-w-0">
+                        <p className="font-semibold text-base sm:text-lg md:text-xl truncate">
+                        {post?.author?.name}
+                        </p>
+                        <p className="font-medium text-sm sm:text-base text-gray-500 truncate">
+                        @{post?.author?.username}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <div>{post.author.name}</div>
-                    <div>{post.author.username}</div>
+
+                {/* Right Side - Category Badge */}
+                <div className="mt-4 sm:mt-0">
+                    <span className="bg-blue-100 text-black text-sm sm:text-base md:text-lg font-semibold px-4 py-2 rounded-2xl block text-center">
+                        {post?.category}
+                    </span>
                 </div>
-    
+            </div>
+
+            <div className="max-w-screen-md mx-auto flex flex-wrap items-center my-6">
+                <div className='flex flex-col'>
+                    <div className='flex items-center gap-4 min-w-0 text-3xl font-bold my-5'>
+                        <p>Pitch Details</p>
+                    </div>
+
+                    <div className='text-[18px] text-gray-800 my-2'>
+                        {parsedContent ? (
+                            <article
+                            className="prose max-w-4xl font-work-sans break-all"
+                            dangerouslySetInnerHTML={{ __html: parsedContent }}
+                            />
+                        ) : (
+                            <p className="no-result">No details provided</p>
+                        )}
+                    </div>
+
+                </div>
                 
             </div>
-            <div>
 
-            </div>
         </div>
+        <hr className="w-full border-t border-gray-500 my-6" />
+
+
+        <Suspense fallback={<Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />}>
+            <View id = {id}/>
+        </Suspense>
+       
     </div>
   )
 }

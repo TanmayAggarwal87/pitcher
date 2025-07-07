@@ -3,6 +3,7 @@ import SearchForm from "@/components/SearchForm";
 import { SanityLive } from "@/lib/live";
 import { STARTUPS_QUERY } from "@/lib/query";
 import { sanityFetch } from "@/sanity/lib/live";
+import { auth } from "../../../auth";
 
  const Home =async ({searchParams}:{searchParams:Promise<{query?:string}>})=>{
   const query = (await searchParams).query;
