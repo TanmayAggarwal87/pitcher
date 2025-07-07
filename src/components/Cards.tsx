@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import React from 'react'
-import { formatDate } from '@/lib/utils'
+import { cn,formatDate } from '@/lib/utils'
 import { Eye } from 'lucide-react'
 import Link from 'next/link'
 import { auth } from '../../auth'
 import { Author ,Startup} from '@/sanity/types'
+import { Skeleton } from './ui/skeleton'
 
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
@@ -94,6 +95,18 @@ const Cards = ( {post}:{post:StartupTypeCard}) => {
 
     </div>
   )
+
 }
+
+export const StartupCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="startup-card_skeleton" />
+      </li>
+    ))}
+  </>
+);
+
 
 export default Cards

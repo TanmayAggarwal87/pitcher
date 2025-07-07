@@ -1,10 +1,12 @@
-import { STARTUP_BY_ID_QUERY } from '@/lib/query'
+import { PLAYLIST_BY_SLUG_QUERY, STARTUP_BY_ID_QUERY } from '@/lib/query'
 import { formatDate } from '@/lib/utils'
 import { client } from '@/sanity/lib/client'
 import React, { Suspense } from 'react'
 import markdownit from "markdown-it";
 import { Skeleton } from '@/components/ui/skeleton'
 import View from '@/components/Views'
+import Cards, { StartupTypeCard } from '@/components/Cards';
+import { Card } from '@/components/ui/card';
 
 
 export const experimental_ppr =true
@@ -14,6 +16,7 @@ const page = async({params}:{params:Promise<{id:string}>}) => {
     const id = (await params).id
     const post = await client.fetch(STARTUP_BY_ID_QUERY,{id})
     const parsedContent = md.render(post?.pitch || "");
+    const {select:editorPosts} = await client.fetch(PLAYLIST_BY_SLUG_QUERY ,{slug:"pitches-of-the-day"})
   return (
     <div>
         <div className="relative bg-blue-700 w-full min-h-[200px] flex justify-center items-center flex-col py-10 px-4 sm:px-6 overflow-hidden">
@@ -118,6 +121,18 @@ const page = async({params}:{params:Promise<{id:string}>}) => {
 
         </div>
         <hr className="w-full border-t border-gray-500 my-6" />
+
+        {editorPosts?.length > 0 && (
+          <div className="max-w-4xl mx-auto">
+            <p className="font-semibold text-[30px] text-black">Editor Picks</p>
+
+            <ul className="mt-7 grid sm:grid-cols-2 gap-5">
+              {editorPosts.map((post: StartupTypeCard, i: number) => (
+                <Cards key={i} post={post} />
+              ))}
+            </ul>
+          </div>
+        )}
 
 
         <Suspense fallback={<Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />}>

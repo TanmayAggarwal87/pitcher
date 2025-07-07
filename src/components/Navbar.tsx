@@ -34,7 +34,7 @@ const Navbar = async () => {
            
             <div className="flex justify-center items-center flex-row gap-2">
             
-              <Link href="startup/create" className="mr-6  flex justify-center items-center flex-row w-full">
+              <Link href="/startup/create" className="mr-6  flex justify-center items-center flex-row w-full">
                 <span className="pr-1.5 text-[18px] hidden sm:inline">Create</span>
                 <CirclePlus className="size-6 md:size-5 text-gray-800" />
               </Link>
@@ -50,7 +50,7 @@ const Navbar = async () => {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="w-full">
-                    <Link href={ `/user/${session?.user?.id}`} className="w-full">
+                    <Link href={ `/user/${session?.id}`} className="w-full">
                       <div className="flex justify-between items-center flex-row w-full">
                         <span>Profile</span>
                         <UserRound className="size-5 text-gray-800"/>
