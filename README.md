@@ -100,5 +100,5 @@ This project really pushed me out of tutorial mode and into **building real-worl
 If you have feedback or want to collab, feel free to open an issue or reach out:
 
 * GitHub: [@TanmayAggarwal87](https://github.com/TanmayAggarwal87)
-* LinkedIn: [Your LinkedIn Profile]([https://www.linkedin.com/in/yourprofile](https://www.linkedin.com/in/tanmay-aggarwal-2aa95632a/))
+* LinkedIn:([My Linkedin Profile](https://www.linkedin.com/in/tanmay-aggarwal-2aa95632a/))
 
