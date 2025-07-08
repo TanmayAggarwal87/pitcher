@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🎤 Pitcher
 
-First, run the development server:
+**Pitcher** is a web app that lets entrepreneurs share and pitch their startup ideas publicly. Whether you're looking for feedback, collaboration, or visibility, Pitcher gives your idea a stage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Live site 👉 [https://pitcher-smoky.vercel.app](https://pitcher-smoky.vercel.app)
+
+---
+
+## 🚀 Tech Stack
+
+- **Next.js** (App Router) with **TypeScript**
+- **Tailwind CSS** for styling
+- **Sanity CMS** as the content backend
+- **Vercel** for deployment
+
+---
+
+## 💡 Why I Built It
+
+This was my **first project using TypeScript**, and it helped me understand how to write cleaner, production-ready code. I learned how to:
+
+- Use **Sanity** as a CMS for real-time content updates
+- Handle **dynamic routes** in Next.js for individual pitch pages
+- Use **TypeScript caching** to improve performance and dev experience
+- Create a scalable codebase with confidence
+
+---
+
+## 📸 Features
+
+- 🎯 **Entrepreneur Pitch Pages** – Each pitch has its own dynamic page with title, image, category, and description.
+- 🔍 **Dynamic Routing** – Automatic route generation based on Sanity slugs.
+- 🧠 **Type-Safe CMS Integration** – Fetched and cached Sanity content using GROQ + TypeScript interfaces.
+- 💅 **Fully Responsive UI** – Designed with Tailwind CSS for a clean and consistent experience.
+- 🚀 **Deployed on Vercel** – With fast build times and automatic previews.
+
+---
+
+## 📂 Folder Structure (Key Highlights)
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+/pages
+/pitch/\[slug].tsx      # Dynamic route for pitch pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+/components
+PitchCard.tsx          # Component to display pitch summary
+Navbar.tsx             # Header with logo and navigation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+/sanity
+schemas/               # Sanity schema definitions
+sanity.config.ts       # Project config for Studio
 
-## Learn More
+````
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 How to Run Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# 1. Clone the repo
+git clone https://github.com/TanmayAggarwal87/pitcher
 
-## Deploy on Vercel
+# 2. Install dependencies
+cd pitcher
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 3. Run the development server
+npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 4. Optional: Setup Sanity and connect to your own project
+````
+
+---
+
+## 🌍 Deployed On
+
+[![Vercel](https://vercel.com/button)](https://vercel.com)
+
+---
+
+## 🧪 Learning Outcomes
+
+* TypeScript helped me confidently write and scale production-ready frontend logic
+* Sanity taught me how to work with real-time CMS content and GROQ queries
+* I got comfortable with deploying full-stack Next.js apps using Vercel
+* Learned the importance of component-based architecture and dynamic routing
+
+---
+
+## 🙌 Special Thanks
+
+This project really pushed me out of tutorial mode and into **building real-world applications**. It set a strong foundation for my future projects and gave me confidence to explore more advanced frontend/backend concepts.
+
+---
+
+## 📫 Connect with Me
+
+If you have feedback or want to collab, feel free to open an issue or reach out:
+
+* GitHub: [@TanmayAggarwal87](https://github.com/TanmayAggarwal87)
+* LinkedIn: [Your LinkedIn Profile]([https://www.linkedin.com/in/yourprofile](https://www.linkedin.com/in/tanmay-aggarwal-2aa95632a/))
+
